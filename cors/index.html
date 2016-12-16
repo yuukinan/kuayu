@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>页面1</h1>
+	<button id="btn">get_something</button>
+        <div id="getByAjax"><div>
+	<script>
+        document.getElementById("btn").onclick = function(){
+        	var xhr = new XMLHttpRequest();
+        	xhr.onreadystatechange = function(){
+        		if(xhr.readyState == 4){
+        			if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+        				var text = xhr.responseText;
+                                        document.getElementById('getByAjax').innerHTML = text;
+        			}else{
+        				alert("Request was unseccessful:"+xhr.status);
+        			}
+        		}
+        	}
+        	xhr.open("get","http://localhost:8088/",true);
+           //     xhr.setRequestHeader("Origin","http://localhost:8086/")
+        	xhr.send("I am page1");        
+        }
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>页面1</h1>
+	<button id="btn">get_something</button>
+        <div id="getByAjax"></div>
+	<script>
+        function addScriptTag(src){
+                var script = document.createElement('script');
+                script.setAttribute('type','text/javascript');
+                script.src=src;
+                document.body.appendChild(script);
+        }
+
+        //回调函数的方法必须是全局的
+        function responseHandle(response){
+                document.getElementById('getByAjax').innerHTML = response.message;
+        }
+        
+        document.getElementById('btn').onclick = function(){
+                addScriptTag('http://localhost:8088/jsonp?callback=responseHandle');
+        }
+      
+	</script>
+</body>
+</html>
